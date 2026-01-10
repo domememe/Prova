@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <script src="cod.js"></script>
+    <link rel ="stylesheet" href="style.css">
+    <title>Codice fiscale</title>
+</head>
+<body>
+    <h2>Codice fiscale</h2>
+    <label>Scrivi il tuo nome</label>
+    <input type="text" id="nome">
+    <br>
+    <label>Scrivi il tuo cognome</label>
+    <input type="text" id="cognome">
+    <br>
+    <label>Inserisci la tua data di nascita</label>
+    <input type="date" id="data">
+    <br>
+    <label>sesso</label>
+    <select id="sesso">
+        <option value=""></option>
+        <option value="m">Maschio</option>
+        <option value="f">Femmina</option>
+    </select>
+    <br>
+    <label>Inserisci il tuo comune</label>
+    <input type="text" id="comune">
+    <br>
+    <input type="file" id ="file">
+    <br>
+    <button onclick="genera()">Genera</button>
+    <p id="errore"></p>
+    <p id="risultato"></p>
+</body>
+</html>
