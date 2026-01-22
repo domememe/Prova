@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morato</title>
+    <link rel="stylesheet" href="Style/stile.css">
+    <style>
+        /* Stili della chat widget */
+        #chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+        #btn-open { width: 65px; height: 65px; border-radius: 50%; background: #007bff; color: white; border: none; cursor: pointer; font-size: 28px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        #chat-win { display: none; width: 350px; height: 500px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); flex-direction: column; overflow: hidden; position: absolute; bottom: 85px; right: 0; border: 1px solid #ddd; }
+        #chat-header { background: #007bff; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        #chat-box { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 12px; }
+        .msg-ia { background: #e9ecef; color: #333; padding: 10px 14px; border-radius: 15px 15px 15px 0; align-self: flex-start; max-width: 80%; font-size: 14px; }
+        .msg-user { background: #007bff; color: white; padding: 10px 14px; border-radius: 15px 15px 0 15px; align-self: flex-end; max-width: 80%; font-size: 14px; }
+        #chat-footer { padding: 15px; border-top: 1px solid #eee; display: flex; }
+        #chat-in { flex: 1; border: 1px solid #ddd; padding: 10px; border-radius: 10px; outline: none; }
+        #btn-send { margin-left: 10px; background: #007bff; color: white; border: none; padding: 10px 18px; border-radius: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Benvenuti a Morato</h1>
+    <div style="text-align: center;">
+        <img src="Img/intro.jpg" alt="Pane Morato" width="1000" class="image1">
+    </div>
+
+    <nav>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Pages/marketing.html">Marketing</a></li>
+        <li><a href="Pages/R&S.html">Ricerca e Sviluppo</a></li>
+        <li><a href="Pages/produzioneLogi.html">Produzione e Logistica</a></li>
+        <li><a href="Pages/postvendita.html">Post-vendita</a></li>
+        <li><a href="Pages/HR.html">Risorse Umane</a></li>
+    </nav>
+
+    <div style="text-align: center;">
+        <img src="Img/toast.png" alt="Fabbrica Morato" width="290">
+        <img src="Img/tramezzino.png" alt="Pane Morato" width="290">
+        <img src="Img/burger.png" alt="Pane Morato" width="290">
+        <img src="Img/bagel.png" alt="Pane Morato" width="290">
+        <img src="Img/piadina.png" alt="Pane Morato" width="290">
+    </div>
+
+    <!-- CHAT WIDGET -->
+    <div id="chat-widget">
+        <button id="btn-open">💬</button>
+        <div id="chat-win">
+            <div id="chat-header">
+                <span>🥖 Assistente Morato</span>
+                <button id="btn-close" style="background:none; border:none; color:white; cursor:pointer;">✕</button>
+            </div>
+            <div id="chat-box">
+                <div class="msg-ia">Ciao! Come è andata la tua esperienza da Morato oggi?</div>
+            </div>
+            <div id="chat-footer">
+                <input id="chat-in" type="text" placeholder="Scrivi qui..." autocomplete="off">
+                <button id="btn-send">Invia</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const URL_DATABASE = "https://script.google.com/macros/s/AKfycbwPRciQlYmAl74u7DMbNeRp3TQ6_o5FdBL-lcGnpFDUkSu1IdshfpUQrkwqbka33iG2/exec";
+
+        const btnOpen = document.getElementById('btn-open');
+        const btnClose = document.getElementById('btn-close');
+        const win = document.getElementById('chat-win');
+        const box = document.getElementById('chat-box');
+        const input = document.getElementById('chat-in');
+        const btnSend = document.getElementById('btn-send');
+
+        btnOpen.onclick = () => { 
+            win.style.display = 'flex'; 
+            btnOpen.style.display = 'none';
+            setTimeout(() => { input.focus(); }, 100); 
+        };
+
+        btnClose.onclick = () => { 
+            win.style.display = 'none'; 
+            btnOpen.style.display = 'block'; 
+        };
+
+        async function inviaMessaggio() {
+            const testo = input.value.trim();
+            if(!testo) return;
+
+            box.innerHTML += `<div class="msg-user">${testo}</div>`;
+            input.value = "";
+            box.scrollTop = box.scrollHeight;
+
+            const tempId = "loading-" + Date.now();
+            box.innerHTML += `<div id="${tempId}" class="msg-ia"><i>L'assistente sta scrivendo...</i></div>`;
+            box.scrollTop = box.scrollHeight;
+
+            try {
+                const response = await fetch(URL_DATABASE + "?message=" + encodeURIComponent(testo), { method: 'POST' });
+                const data = await response.json();
+                document.getElementById(tempId).innerText = data.risposta;
+            } catch (error) {
+                document.getElementById(tempId).innerText = "Grazie per il feedback! Lo abbiamo registrato nel sistema.";
+            }
+            box.scrollTop = box.scrollHeight;
+            input.focus();
+        }
+
+        btnSend.onclick = inviaMessaggio;
+        input.onkeypress = (e) => { if(e.key === 'Enter') inviaMessaggio(); };
+    </script>
+</body>
+</html>

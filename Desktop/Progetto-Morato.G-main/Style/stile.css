@@ -1,0 +1,131 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* BODY */
+body {
+    background-color: #e1c8a8; /* beige scuro */
+    color: #3d2b1f; /* marrone scuro */
+    line-height: 1.7;
+}
+
+/* HERO TITLE */
+h1 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-top: 60px;
+    background: linear-gradient(90deg, #b8860b, #8b5e3c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* PARAGRAFI GENERALI */
+p {
+    text-align: left;
+    margin: 20px 0;
+    font-size: 1.1rem;
+    color: #3d2b1f;
+}
+
+/* NAVBAR */
+nav {
+    display: flex;
+    justify-content: center;
+    background: #d6bfa3;
+    padding: 20px 35px;
+    margin: 0 auto 60px auto;
+    max-width: 1200px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+nav li {
+    list-style: none;
+    margin: 0 18px;
+}
+
+nav a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #b8860b;
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+nav a:hover {
+    background: #8b5e3c;
+    color: #fff2e0;
+    box-shadow: 0 4px 12px rgba(139, 94, 60, 0.35);
+}
+
+/* MAIN SECTIONS CONTAINER */
+.rs-container {
+    max-width: 1100px;
+    margin: 0 auto 60px auto;
+    padding: 0 20px;
+}
+
+/* SECTIONS GRID */
+.rs-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* CARD */
+.rs-card {
+    background: #d6bfa3;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rs-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.rs-card h2 {
+    margin-bottom: 10px;
+    color: #8b5e3c;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.rs-card p {
+    text-align: center;
+    color: #3d2b1f;
+    font-size: 1.05rem;
+}
+
+/* IMMAGINI HERO */
+.image1 {
+    border-radius: 12px;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto 30px auto;
+    display: block;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* FOOTER */
+footer {
+    margin-top: 80px;
+    padding: 35px;
+    text-align: center;
+    background: linear-gradient(135deg, #b8860b, #8b5e3c);
+    color: #fff2e0;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
